@@ -36,6 +36,8 @@ Set your backend URL in `.env`:
 
 ```
 VITE_API_URL=http://localhost:5000/api
+VITE_SERVER_URL=http://localhost:5000
+VITE_PORT=3000
 ```
 
 ## 📁 Project Structure
