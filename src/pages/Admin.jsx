@@ -133,6 +133,7 @@ export default function Admin() {
       formData.append("available", data.available);
       formData.append("image", data.image[0]);
     }
+    delete data.image;
 
     try {
       if (modal === "add") {
