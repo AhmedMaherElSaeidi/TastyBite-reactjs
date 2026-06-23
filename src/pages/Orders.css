@@ -1,0 +1,100 @@
+.orders-page { padding-bottom: var(--sp-3xl); }
+
+.orders-title {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: var(--sp-xl);
+}
+
+.orders-list { display: flex; flex-direction: column; gap: var(--sp-md); }
+
+.order-card { overflow: hidden; transition: box-shadow var(--transition); }
+.order-card.open { box-shadow: var(--shadow-md); }
+
+.order-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--sp-lg);
+  width: 100%;
+  text-align: start;
+  gap: var(--sp-md);
+  flex-wrap: wrap;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+.order-header:hover { background: var(--clr-surface-2); }
+
+.order-header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+}
+.order-id { font-weight: 700; font-size: .95rem; }
+
+.order-header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-md);
+  color: var(--clr-text-secondary);
+  font-size: .85rem;
+  margin-inline-start: auto;
+}
+.order-total { font-weight: 700; color: var(--clr-text-primary); font-size: .95rem; }
+
+.order-body {
+  border-top: 1px solid var(--clr-border);
+  padding: var(--sp-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-xl);
+}
+
+/* Tracking */
+.tracking-section {}
+.section-sm-title {
+  font-size: .85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--clr-text-muted);
+  margin-bottom: var(--sp-md);
+}
+
+/* Items */
+.order-items-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+}
+.order-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-md);
+  padding: var(--sp-sm);
+  background: var(--clr-surface-2);
+  border-radius: var(--r-md);
+}
+.order-item-img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: var(--r-sm);
+}
+.order-item-name { flex: 1; font-weight: 600; font-size: .875rem; }
+.order-item-qty { color: var(--clr-text-secondary); font-size: .85rem; }
+.order-item-price { font-weight: 700; color: var(--clr-primary-dark); }
+
+/* Meta */
+.order-meta {
+  display: flex;
+  gap: var(--sp-xl);
+  flex-wrap: wrap;
+}
+.meta-item { display: flex; flex-direction: column; gap: 2px; }
+.meta-label { font-size: .78rem; font-weight: 700; color: var(--clr-text-muted); }
+.meta-value { font-size: .9rem; font-weight: 500; }
