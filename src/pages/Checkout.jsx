@@ -122,6 +122,7 @@ export default function Checkout() {
                   <label className="form-label">{t("checkout.name")}</label>
                   <input
                     className="form-input"
+                    placeholder="e.g. John Smith"
                     {...register("name", {
                       required: "Name is required",
                     })}
