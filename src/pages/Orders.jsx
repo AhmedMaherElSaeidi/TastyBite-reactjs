@@ -162,7 +162,7 @@ export default function Orders() {
                         <div className="meta-item">
                           <span className="meta-label">💳 {t("checkout.payment_method")}</span>
                           <span className="meta-value">
-                            {order.paymentMethod === "cod"
+                            {order.payment === "cod"
                               ? t("checkout.cod")
                               : t("checkout.online")}
                           </span>
