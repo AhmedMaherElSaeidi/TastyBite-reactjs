@@ -39,7 +39,7 @@ export default function Auth() {
       if (mode === "login") {
         result = await authService.login(data.email, data.password);
         toast.success(t("auth.login_success"));
-        
+
         login(result.user, result.token);
         navigate(result.user.role.en === "admin" ? "/admin" : "/menu");
       } else {
@@ -50,7 +50,8 @@ export default function Auth() {
       }
     } catch (err) {
       console.log(err);
-      toast.error(err.message || t("common.error"));
+      if (mode !== "login")toast.error(err.message || t("common.error"));
+      if (mode === "login") toast.error("Wrong login credentials" || t("common.error"));
     } finally {
       setLoading(false);
     }
