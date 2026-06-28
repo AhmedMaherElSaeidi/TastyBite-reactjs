@@ -251,30 +251,10 @@ export default function Admin() {
           <div className="overview-section">
             <div className="stats-grid">
               {[
-                {
-                  label: t("admin.total_orders"),
-                  value: stats.totalOrders,
-                  icon: "📦",
-                  color: "var(--clr-info)",
-                },
-                {
-                  label: t("admin.total_revenue"),
-                  value: `${t("common.egp")} ${stats.revenue}`,
-                  icon: "💰",
-                  color: "var(--clr-success)",
-                },
-                {
-                  label: t("admin.pending_orders"),
-                  value: stats.pending,
-                  icon: "⏳",
-                  color: "var(--clr-warning)",
-                },
-                {
-                  label: t("admin.total_products"),
-                  value: stats.products,
-                  icon: "🍽️",
-                  color: "var(--clr-primary)",
-                },
+                { label: t("admin.total_orders"), value: stats.totalOrders, icon: "📦", color: "var(--clr-info)" },
+                { label: t("admin.total_revenue"), value: `${t("common.egp")} ${stats.revenue}`, icon: "💰", color: "var(--clr-success)" },
+                { label: t("admin.pending_orders"), value: stats.pending, icon: "⏳", color: "var(--clr-warning)" },
+                { label: t("admin.total_products"), value: stats.products, icon: "🍽️", color: "var(--clr-primary)" },
               ].map((s, i) => (
                 <div key={i} className="stat-card card">
                   <div className="stat-icon" style={{ background: s.color + "22", color: s.color }}>
@@ -289,8 +269,9 @@ export default function Admin() {
             </div>
 
             <h2 className="section-2-title">{t("admin.today")}</h2>
+
             <div className="recent-orders">
-              {orders.slice(0, 5).map((o) => (
+              {orders.slice(0, 5).map((o, idx) => (
                 <div key={o._id} className="recent-order-row">
                   <div className="ro-id d-flex flex-column">
                     <span>{o.user?.email}</span>
@@ -336,7 +317,7 @@ export default function Admin() {
 
             <div className="admin-products-grid">
               {products?.map((p) => (
-                <div key={p._id} className="admin-product-card card">
+                <div key={p._id} className="admin-product-card card mb-2">
                   <img
                     src={p.image}
                     alt={p.name.en}
@@ -399,36 +380,31 @@ export default function Admin() {
                 <tbody>
                   {filteredOrders.map((o) => (
                     <tr key={o._id}>
-                      <td className="td-id">
+                      <td className="td-id" data-label="Order info">
                         <span className="d-block">Name: {o.name}</span>
                         <span className="d-block">Location: {o.address}</span>
                         <span className="d-block">Tel: {o.phone}</span>
                         <span className="d-block">ID: {o._id}</span>
                         <span className="d-block">Email: {o.user?.email}</span>
                       </td>
-                      <td>
-                        {o.items.reduce((cumm, curr) => {
-                          return (cumm += curr.quantity);
-                        }, 0)}
-                        item
-                        {(o.items.length === 1 ? o.items.length : o.items[0].quantity) > 1
-                          ? "s"
-                          : ""}
+                      <td data-label="Items">
+                        {o.items.reduce((cumm, curr) => cumm += curr.quantity, 0)} item
+                        {(o.items.length === 1 ? o.items.length : o.items[0].quantity) > 1 ? "s" : ""}
                       </td>
-                      <td className="td-total">
+                      <td className="td-total" data-label="Total">
                         {t("common.egp")} {o.total}
                       </td>
-                      <td>
+                      <td data-label="Payment">
                         <span className="badge badge-primary">
                           {o.paymentMethod === "cod" ? "COD" : "Online"}
                         </span>
                       </td>
-                      <td>
+                      <td data-label="Status">
                         <span className={`badge ${STATUS_BADGE[o.status]}`}>
                           {t(`orders.statuses.${o.status}`)}
                         </span>
                       </td>
-                      <td>
+                      <td data-label="Action">
                         <select
                           className="status-select"
                           value={o.status}
