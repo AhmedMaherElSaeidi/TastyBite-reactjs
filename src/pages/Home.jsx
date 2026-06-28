@@ -127,7 +127,7 @@ export default function Home() {
               <div key={product._id} className="product-card">
                 <div className="product-img-wrap">
                   <img
-                    src={import.meta.env.VITE_SERVER_URL + product.image}
+                    src={product.image}
                     alt={product.name[isRTL ? "ar" : "en"]}
                     className="product-img"
                     loading="lazy"

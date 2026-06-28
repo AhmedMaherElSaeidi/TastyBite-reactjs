@@ -118,7 +118,8 @@ export default function Admin() {
   };
 
   const handleSave = async (data) => {
-    let formData = data;
+    let formData = { ...data };
+    setSaving((prev) => true);
 
     if (typeof data.image != "string" && data.image[0]) {
       formData = new FormData();
@@ -142,7 +143,9 @@ export default function Admin() {
         await productService.update(editProduct._id, formData);
       }
 
+      setSaving((prev) => false);
       closeModal();
+      toast.success(modal === "add" ? "Product added!" : "Product updated!");
     } finally {
       setRefresh(!refresh);
       setSaving(false);
@@ -165,7 +168,13 @@ export default function Admin() {
   };
 
   const filteredOrders = orders.filter(
-    (o) => o?._id?.includes(orderSearch) || o?.phone?.includes(orderSearch),
+    (o) =>
+      o?._id?.includes(orderSearch) ||
+      o?.user?.email?.includes(orderSearch) ||
+      o?.status?.includes(orderSearch) ||
+      o?.phone?.includes(orderSearch) ||
+      o?.name?.includes(orderSearch) ||
+      o?.address?.includes(orderSearch),
   );
 
   const STATUS_BADGE = {
@@ -328,7 +337,7 @@ export default function Admin() {
               {products?.map((p) => (
                 <div key={p._id} className="admin-product-card card">
                   <img
-                    src={import.meta.env.VITE_SERVER_URL + p.image}
+                    src={p.image}
                     alt={p.name.en}
                     className="admin-product-img"
                   />
@@ -378,7 +387,7 @@ export default function Admin() {
               <table className="orders-table">
                 <thead>
                   <tr>
-                    <th>Order ID / email</th>
+                    <th>Order ID</th>
                     <th>Items</th>
                     <th>Total</th>
                     <th>Payment</th>
@@ -390,11 +399,20 @@ export default function Admin() {
                   {filteredOrders.map((o) => (
                     <tr key={o._id}>
                       <td className="td-id">
-                        <span className="d-block">{o._id}</span>
-                        <span className="d-block">{o.user?.email}</span>
+                        <span className="d-block">Name: {o.name}</span>
+                        <span className="d-block">Location: {o.address}</span>
+                        <span className="d-block">Tel: {o.phone}</span>
+                        <span className="d-block">ID: {o._id}</span>
+                        <span className="d-block">Email: {o.user?.email}</span>
                       </td>
                       <td>
-                        {o.items.length} item{o.items.length !== 1 ? "s" : ""}
+                        {o.items.reduce((cumm, curr) => {
+                          return (cumm += curr.quantity);
+                        }, 0)}
+                        item
+                        {(o.items.length === 1 ? o.items.length : o.items[0].quantity) > 1
+                          ? "s"
+                          : ""}
                       </td>
                       <td className="td-total">
                         {t("common.egp")} {o.total}

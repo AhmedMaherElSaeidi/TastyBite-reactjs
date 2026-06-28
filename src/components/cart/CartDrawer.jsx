@@ -58,7 +58,7 @@ export default function CartDrawer() {
               {items.map(({ product, quantity }) => (
                 <li key={product._id} className="cart-item">
                   <img
-                    src={import.meta.env.VITE_SERVER_URL + product.image}
+                    src={product.image}
                     alt={product.name[i18n.language]}
                     className="cart-item-img"
                   />

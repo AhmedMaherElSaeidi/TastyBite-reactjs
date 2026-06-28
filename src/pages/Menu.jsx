@@ -67,6 +67,7 @@ export default function Menu() {
     setActiveCat(id);
     setSearchParams(id !== "all" ? { cat: id } : {});
   };
+console.log(products);
 
   return (
     <main className="page menu-page">
@@ -119,7 +120,7 @@ export default function Menu() {
               <div key={product._id} className="menu-card">
                 <div className="menu-img-wrap">
                   <img
-                    src={import.meta.env.VITE_SERVER_URL + product.image}
+                    src={product.image}
                     alt={product.name[isRTL ? "ar" : "en"]}
                     className="menu-img"
                     loading="lazy"

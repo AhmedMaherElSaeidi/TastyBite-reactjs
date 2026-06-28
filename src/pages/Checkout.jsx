@@ -244,7 +244,7 @@ export default function Checkout() {
                 {items.map(({ product, quantity }) => (
                   <li key={product._id} className="summary-item">
                     <img
-                      src={import.meta.env.VITE_SERVER_URL + product.image}
+                      src={product.image}
                       alt={product.name[i18n.language]}
                       className="summary-img"
                     />

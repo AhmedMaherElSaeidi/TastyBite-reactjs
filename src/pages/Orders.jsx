@@ -137,7 +137,7 @@ export default function Orders() {
                           {order.items.map(({ product, quantity }) => (
                             <li key={product._id} className="order-item">
                               <img
-                                src={import.meta.env.VITE_SERVER_URL + product.image}
+                                src={product.image}
                                 alt={product.name[isRTL ? "ar" : "en"]}
                                 className="order-item-img"
                               />

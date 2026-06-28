@@ -100,7 +100,7 @@ const resources = {
         name: "Full Name",
         fname: "First Name",
         lname: "Last Name",
-        phone: "Phhone Number",
+        phone: "Phone Number",
         have_account: "Already have an account?",
         no_account: "Don't have an account?",
         forgot: "Forgot password?",
