@@ -49,9 +49,7 @@ export default function Auth() {
         changeMode("login");
       }
     } catch (err) {
-      console.log(err);
-      if (mode !== "login")toast.error(err.message || t("common.error"));
-      if (mode === "login") toast.error("Wrong login credentials" || t("common.error"));
+      console.log(err); toast.error(err.message || t("common.error"));
     } finally {
       setLoading(false);
     }
