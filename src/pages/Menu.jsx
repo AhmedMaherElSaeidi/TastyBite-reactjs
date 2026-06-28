@@ -36,7 +36,6 @@ export default function Menu() {
   }, [searchParams]);
 
   const filtered = useMemo(() => {
-    return []
     return products?.filter((p) => {
       const matchCat = activeCat === "all" || p.category.name.en.toLowerCase() === activeCat;
       const q = search.toLowerCase();
