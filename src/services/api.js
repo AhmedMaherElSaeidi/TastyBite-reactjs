@@ -1,6 +1,6 @@
-import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { useAuthStore } from "../store";
+import axios from "axios";
 
 const token = () => {
   const token = useAuthStore.getState().token;
@@ -22,15 +22,19 @@ const token = () => {
   }
 };
 
+const api = axios.create({
+  baseURL: import.meta.env.VITE_SERVER_URL,
+});
+
 // ─── AUTH ─────────────────────────────────────────────────────────────────────
 export const authService = {
   async login(email, password) {
-    const res = await axios.post("/api/auth/login", { email, password });
+    const res = await api.post("/api/auth/login", { email, password });
     return res.data;
   },
 
   async register(registerData) {
-    const res = await axios.post("/api/auth/register", registerData);
+    const res = await api.post("/api/auth/register", registerData);
     return res.data;
   },
 };
@@ -38,7 +42,7 @@ export const authService = {
 // ─── CATEGORIES ───────────────────────────────────────────────────────────────
 export const categoryService = {
   async getAll() {
-    const res = await axios.get("/api/categories");
+    const res = await api.get("/api/categories");
     return res.data;
   },
 };
@@ -46,14 +50,14 @@ export const categoryService = {
 // ─── PRODUCTS ─────────────────────────────────────────────────────────────────
 export const productService = {
   async getAll(params = {}) {
-    const res = await axios.get("/api/products", { params });
+    const res = await api.get("/api/products", { params });
     return res.data;
   },
 
   // data MUST be a FormData instance so Multer can parse it on the server
   async create(data) {
     const isFormData = data instanceof FormData;
-    const res = await axios.post("/api/products", data, {
+    const res = await api.post("/api/products", data, {
       headers: isFormData
         ? { authorization: `Bearer ${token()}`, "Content-Type": "multipart/form-data" }
         : { authorization: `Bearer ${token()}` },
@@ -62,9 +66,9 @@ export const productService = {
   },
 
   // data can be FormData (with new images) or plain object
-  async update(id, data) {    
+  async update(id, data) {
     const isFormData = data instanceof FormData;
-    const res = await axios.put(`/api/products/${id}`, data, {
+    const res = await api.put(`/api/products/${id}`, data, {
       headers: isFormData
         ? { authorization: `Bearer ${token()}`, "Content-Type": "multipart/form-data" }
         : { authorization: `Bearer ${token()}` },
@@ -73,7 +77,7 @@ export const productService = {
   },
 
   async remove(id) {
-    const res = await axios.delete(`/api/products/${id}`, {
+    const res = await api.delete(`/api/products/${id}`, {
       headers: { authorization: `Bearer ${token()}` },
     });
     return res.data;
@@ -83,7 +87,7 @@ export const productService = {
 // ─── ORDERS ───────────────────────────────────────────────────────────────────
 export const orderService = {
   async getMyOrders() {
-    return axios
+    return api
       .get("/api/orders/my-orders", {
         headers: { authorization: `Bearer ${token()}` },
       })
@@ -91,7 +95,7 @@ export const orderService = {
   },
 
   async getAllOrders() {
-    return axios
+    return api
       .get("/api/orders", {
         headers: { authorization: `Bearer ${token()}` },
       })
@@ -99,7 +103,7 @@ export const orderService = {
   },
 
   async place(orderData) {
-    return axios
+    return api
       .post("/api/orders", orderData, {
         headers: { authorization: `Bearer ${token()}` },
       })
@@ -107,7 +111,7 @@ export const orderService = {
   },
 
   async updateStatus(id, status) {
-    return axios
+    return api
       .patch(
         `/api/orders/${id}/status`,
         { status },
