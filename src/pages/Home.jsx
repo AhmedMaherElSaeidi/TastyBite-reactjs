@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -17,12 +18,16 @@ const HERO_SLIDES = [
     image:
       "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=1200&auto=format&fit=crop",
     cat: "pizza",
+  }, {
+    image:
+      "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=1200&auto=format&fit=crop",
+    cat: "sushi",
   },
   {
     image:
-      "https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=1200&auto=format&fit=crop",
-    cat: "sushi",
-  },
+      "https://images.unsplash.com/photo-1556773945-9613f0346c74?w=1200&auto=format&fit=crop",
+    cat: "drink",
+  }
 ];
 
 export default function Home() {

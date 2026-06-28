@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -67,7 +68,7 @@ export default function Menu() {
     setActiveCat(id);
     setSearchParams(id !== "all" ? { cat: id } : {});
   };
-console.log(products);
+  console.log(products);
 
   return (
     <main className="page menu-page">

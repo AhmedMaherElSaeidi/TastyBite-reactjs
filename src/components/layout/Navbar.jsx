@@ -1,4 +1,5 @@
 import { useState } from "react";
+import React from 'react';
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { FiShoppingCart, FiUser, FiMenu, FiX, FiLogOut, FiPackage, FiGrid } from "react-icons/fi";
