@@ -36,6 +36,7 @@ export default function Menu() {
   }, [searchParams]);
 
   const filtered = useMemo(() => {
+    return []
     return products?.filter((p) => {
       const matchCat = activeCat === "all" || p.category.name.en.toLowerCase() === activeCat;
       const q = search.toLowerCase();
@@ -68,7 +69,6 @@ export default function Menu() {
     setActiveCat(id);
     setSearchParams(id !== "all" ? { cat: id } : {});
   };
-  console.log(products);
 
   return (
     <main className="page menu-page">
@@ -108,14 +108,20 @@ export default function Menu() {
           {filtered.length} {filtered.length === 1 ? "dish" : "dishes"} found
         </p>
 
+        {loading && <div className="empty-state">
+          <div class="spinner-border text-warning" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>}
+
         {/* Grid */}
-        {filtered.length === 0 ? (
+        {!loading && filtered.length === 0 &&
           <div className="empty-state">
             <div className="empty-state-icon">🍽️</div>
             <h3>{t("menu.no_results")}</h3>
-            <p>{t("menu.no_results_sub")}</p>
+
           </div>
-        ) : (
+        }{!loading && filtered.length !== 0 &&
           <div className="menu-grid">
             {filtered.map((product) => (
               <div key={product._id} className="menu-card">
@@ -154,7 +160,7 @@ export default function Menu() {
               </div>
             ))}
           </div>
-        )}
+        }
       </div>
     </main>
   );
