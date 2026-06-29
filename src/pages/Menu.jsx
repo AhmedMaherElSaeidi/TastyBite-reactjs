@@ -137,8 +137,7 @@ export default function Menu() {
                     <h3 className="menu-name">{product.name[isRTL ? "ar" : "en"]}</h3>
                     <div className="menu-rating">
                       <FiStar size={12} fill="var(--clr-primary)" stroke="none" />
-                      <span>{product.rating}</span>
-                      <span className="review-count">({product.reviews})</span>
+                      <span className="review-count">{product.rating}</span>
                     </div>
                   </div>
                   <p className="menu-desc">{product.description[isRTL ? "ar" : "en"]}</p>

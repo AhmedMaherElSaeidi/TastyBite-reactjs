@@ -333,7 +333,7 @@ export default function Admin() {
                     </p>
                   </div>
                   <div className="admin-product-actions">
-                    <button className="btn btn-ghost btn-sm" onClick={() => openEdit(p)}>
+                    <button className="btn btn-primary btn-sm" onClick={() => openEdit(p)}>
                       <FiEdit2 />
                     </button>
                     <button
